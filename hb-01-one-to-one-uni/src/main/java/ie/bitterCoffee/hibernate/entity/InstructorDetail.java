@@ -1,10 +1,12 @@
 package ie.bitterCoffee.hibernate.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,9 @@ public class InstructorDetail
 	
 	@Column(name="hobby")
 	String hobby;
+	
+	@OneToOne(mappedBy="instructorDetail",cascade=CascadeType.ALL)
+	private Instructor instructor;
 	
 	//create the constructors
 	public InstructorDetail()
@@ -67,13 +72,17 @@ public class InstructorDetail
 		this.hobby = hobby;
 	}
 
-	@Override
-	public String toString()
+	public Instructor getInstructor()
 	{
-		return "InstructorDetail [id=" + id + ", youtubeChannel=" + youtubeChannel + ", hobby=" + hobby + "]";
+		return instructor;
 	}
-	
-	
+
+	public void setInstructor(Instructor instructor)
+	{
+		this.instructor = instructor;
+	}
+
+		
 	
 	//generate getters/setter
 	
